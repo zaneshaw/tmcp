@@ -1,7 +1,7 @@
 import { marked } from 'marked';
 import { appState, sortResults, type PaletteItem } from './state';
 import { builtInItems } from './built-in-items';
-import { electronState, setPluginSettings, type AppSetting } from './electron';
+import { electronState, setPluginSettings, fullReload, type AppSetting } from './electron';
 import { workerState } from './worker-host';
 
 interface TMCPRegisterOptions {
@@ -143,6 +143,10 @@ function createTmcpOpForPlugin(plugin: TMCPPlugin) {
 
     addSettingButton(settingsOptions: PluginSettingButton) {
       plugin.buttons.push(settingsOptions);
+    },
+
+    async fullReload() {
+      await fullReload();
     },
 
     onResult(handler: (result: any) => boolean) {
